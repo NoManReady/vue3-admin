@@ -1,0 +1,7 @@
+{
+  "include": [
+    "vite.config.ts",
+    "config/**/*.ts"
+  ],
+  "composite": true
+}

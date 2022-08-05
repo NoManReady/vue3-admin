@@ -1,0 +1,1162 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "BSX DMS API",
+		"description": "Bluestacks 10后台数据管理系统",
+		"contact": {
+			"email": "summer@bluestacks.com"
+		},
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		},
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:8000/"
+		},
+		{
+			"url": "https://localhost:8000/"
+		}
+	],
+	"paths": {
+		"/api/login": {
+			"post": {
+				"tags": ["login"],
+				"description": "用户登录",
+				"operationId": "login",
+				"requestBody": {
+					"description": "登录参数",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LoginParams"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginResult"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/logout": {
+			"post": {
+				"tags": ["login"],
+				"description": "退出登录接口",
+				"operationId": "logout",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/user/list": {
+			"get": {
+				"tags": ["user"],
+				"description": "获取用户列表",
+				"operationId": "getUsers",
+				"parameters": [
+					{
+						"name": "pageSize",
+						"in": "query",
+						"description": "分页大小",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"name": "current",
+						"in": "query",
+						"description": "当前分页",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"name": "name",
+						"in": "query",
+						"description": "文件名称",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserList"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/user/add": {
+			"post": {
+				"tags": ["user"],
+				"description": "添加用户",
+				"operationId": "addUser",
+				"requestBody": {
+					"description": "用户body",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserInfo"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/user/update": {
+			"post": {
+				"tags": ["user"],
+				"description": "修改用户",
+				"operationId": "updateUser",
+				"requestBody": {
+					"description": "用户body",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserInfo"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/user/delete": {
+			"post": {
+				"tags": ["user"],
+				"description": "删除用户",
+				"operationId": "delUser",
+				"requestBody": {
+					"description": "用户id",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteUserBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/user/userInfo": {
+			"get": {
+				"tags": ["user"],
+				"description": "获取当前的用户",
+				"operationId": "getUserInfo",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserInfo"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/version/list": {
+			"get": {
+				"tags": ["version"],
+				"description": "获取包列表",
+				"operationId": "getVersions",
+				"parameters": [
+					{
+						"name": "current",
+						"in": "query",
+						"description": "当前分页",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"name": "pageSize",
+						"in": "query",
+						"description": "分页大小",
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"name": "filename",
+						"in": "query",
+						"description": "文件名称",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/VersionList"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/version/add": {
+			"post": {
+				"tags": ["version"],
+				"description": "上传包",
+				"operationId": "addVersion",
+				"requestBody": {
+					"description": "包元数据",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/VersionItem"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/version/delete": {
+			"post": {
+				"tags": ["version"],
+				"description": "删除包",
+				"operationId": "delVersion",
+				"requestBody": {
+					"description": "元数据ID列表",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/VersionDeleteParams"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/version/sts": {
+			"get": {
+				"tags": ["common"],
+				"description": "获取上传密钥（alioss使用）",
+				"operationId": "getAliOssParams",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AliOssParams"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/dump/list": {
+			"get": {
+				"tags": ["dump"],
+				"description": "获取Dump列表",
+				"operationId": "getDumps",
+				"parameters": [
+					{
+						"name": "path",
+						"in": "query",
+						"description": "OSS文件路径",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DumpList"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/dump/delete": {
+			"post": {
+				"tags": ["dump"],
+				"description": "删除文件",
+				"operationId": "delDump",
+				"requestBody": {
+					"description": "元数据path",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DumpDeleteParams"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/dump/package": {
+			"get": {
+				"tags": ["dump"],
+				"description": "打包文件",
+				"operationId": "doPackage",
+				"parameters": [
+					{
+						"name": "path",
+						"in": "query",
+						"description": "打包路径",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "limit",
+						"in": "query",
+						"description": "打包限制数量",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/role/list": {
+			"get": {
+				"tags": ["role"],
+				"operationId": "getRoles",
+				"description": "获取角色列表",
+				"parameters": [
+					{
+						"name": "pageSize",
+						"in": "query",
+						"description": "分页大小",
+						"schema": {
+							"type": "number",
+							"default": 10
+						}
+					},
+					{
+						"name": "current",
+						"description": "当前页码",
+						"in": "query",
+						"schema": {
+							"type": "number",
+							"default": 0
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RoleList"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/role/add": {
+			"post": {
+				"tags": ["role"],
+				"description": "添加角色",
+				"operationId": "addRole",
+				"requestBody": {
+					"description": "角色body",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RoleItem"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/role/update": {
+			"post": {
+				"tags": ["role"],
+				"description": "修改角色",
+				"operationId": "updateRole",
+				"requestBody": {
+					"description": "角色body",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RoleItem"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/role/delete": {
+			"post": {
+				"tags": ["role"],
+				"description": "删除角色",
+				"operationId": "delRole",
+				"requestBody": {
+					"description": "角色id",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteRoleBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/role/byUser": {
+			"get": {
+				"tags": ["role"],
+				"operationId": "getRolesByUserId",
+				"description": "获取用户的角色",
+				"parameters": [
+					{
+						"name": "userId",
+						"description": "用户ID",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RoleList"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/menu/add": {
+			"post": {
+				"tags": ["access"],
+				"description": "添加access",
+				"operationId": "addAccess",
+				"requestBody": {
+					"description": "Accessbody",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MenuItem"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/menu/update": {
+			"post": {
+				"tags": ["access"],
+				"description": "修改access",
+				"operationId": "updateAccess",
+				"requestBody": {
+					"description": "access body",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MenuItem"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/menu/delete": {
+			"post": {
+				"tags": ["access"],
+				"description": "删除Access",
+				"operationId": "delAccess",
+				"requestBody": {
+					"description": "角色id",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteAccessBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/menu/list": {
+			"get": {
+				"tags": ["access"],
+				"operationId": "getAccesss",
+				"description": "获取权限列表",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MenuList"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/access/byRole": {
+			"get": {
+				"tags": ["access"],
+				"operationId": "getAccessByRole",
+				"description": "根据roleId获取权限列表",
+				"parameters": [
+					{
+						"name": "roleId",
+						"description": "角色Id",
+						"in": "query",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AccessList"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/user/changePassword": {
+			"post": {
+				"description": "修改密码",
+				"tags": ["user"],
+				"operationId": "modifyPassword",
+				"requestBody": {
+					"description": "新旧密码",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ModifyPasswordBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"PaginationParams": {
+				"type": "object",
+				"properties": {
+					"pageSize": {
+						"type": "number",
+						"description": "每页大小",
+						"default": 10
+					},
+					"current": {
+						"type": "number",
+						"description": "当前页码",
+						"default": 1
+					}
+				}
+			},
+			"LoginResult": {
+				"required": ["status"],
+				"type": "object",
+				"properties": {
+					"token": {
+						"type": "string",
+						"description": "登录唯一标识"
+					},
+					"status": {
+						"type": "number",
+						"description": "登录状态(0:failure,1:success)",
+						"enum": [0, 1]
+					},
+					"msg": {
+						"type": "string",
+						"description": "登录描述信息"
+					}
+				},
+				"description": "登录成功信息"
+			},
+			"LoginParams": {
+				"required": ["account", "password"],
+				"type": "object",
+				"properties": {
+					"account": {
+						"type": "string",
+						"description": "登录账号"
+					},
+					"password": {
+						"type": "string",
+						"description": "登录密码"
+					}
+				},
+				"description": "登录参数"
+			},
+			"DeleteUserBody": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "用户Id"
+					}
+				}
+			},
+			"UserInfo": {
+				"type": "object",
+				"properties": {
+					"account": {
+						"type": "string",
+						"description": "账号"
+					},
+					"name": {
+						"type": "string",
+						"description": "用户名"
+					},
+					"avatar": {
+						"type": "string",
+						"description": "用户头像"
+					},
+					"email": {
+						"type": "string",
+						"description": "用户邮箱"
+					},
+					"country": {
+						"type": "string",
+						"description": "所属国家"
+					},
+					"phone": {
+						"type": "string",
+						"description": "电话号码"
+					},
+					"id": {
+						"type": "string",
+						"description": "用户ID"
+					},
+					"updateTime": {
+						"type": "string",
+						"description": "最后更新时间"
+					},
+					"menus": {
+						"type": "object",
+						"description": "用户角色ID列表"
+					}
+				},
+				"description": "用户信息"
+			},
+			"UserList": {
+				"type": "object",
+				"properties": {
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/UserInfo"
+						}
+					},
+					"total": {
+						"type": "integer"
+					},
+					"success": {
+						"type": "boolean"
+					}
+				}
+			},
+			"VersionDeleteParams": {
+				"type": "object",
+				"required": ["id"],
+				"properties": {
+					"id": {
+						"type": "string"
+					}
+				}
+			},
+			"VersionItem": {
+				"required": ["type", "url", "md5", "filename", "remarks"],
+				"type": "object",
+				"description": "Version安装包元数据",
+				"properties": {
+					"url": {
+						"type": "string",
+						"description": "文件下载地址"
+					},
+					"cdnUrl": {
+						"type": "string",
+						"description": "文件下载地址CDN"
+					},
+					"type": {
+						"type": "string",
+						"description": "文件类别",
+						"enum": ["Setup", "Upgrade"]
+					},
+					"filename": {
+						"type": "string",
+						"description": "上传文件全路径"
+					},
+					"remarks": {
+						"type": "string",
+						"description": "文件备注"
+					},
+					"md5": {
+						"type": "string",
+						"description": "文件MD5值"
+					},
+					"id": {
+						"type": "string",
+						"description": "ID"
+					},
+					"createTime": {
+						"type": "string",
+						"description": "创建时间"
+					},
+					"version": {
+						"type": "string",
+						"description": "版本号"
+					}
+				}
+			},
+			"VersionList": {
+				"type": "object",
+				"properties": {
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/VersionItem"
+						}
+					},
+					"total": {
+						"type": "integer",
+						"description": "列表的内容总数",
+						"format": "int32"
+					},
+					"success": {
+						"type": "boolean"
+					}
+				}
+			},
+			"AliOssParams": {
+				"required": ["accessKeyId", "accessKeySecret", "expiration", "securityToken"],
+				"type": "object",
+				"properties": {
+					"accessKeySecret": {
+						"type": "string"
+					},
+					"expiration": {
+						"type": "string"
+					},
+					"accessKeyId": {
+						"type": "string"
+					},
+					"securityToken": {
+						"type": "string"
+					}
+				}
+			},
+			"DumpDeleteParams": {
+				"type": "object",
+				"description": "Dump删除请求体",
+				"properties": {
+					"path": {
+						"type": "string",
+						"description": "路径"
+					},
+					"id": {
+						"type": "string",
+						"description": "文件ID"
+					}
+				}
+			},
+			"DumpStateEnum": {
+				"type": "integer",
+				"description": "状态:-1错误；0未打包；1打包中；2已打包",
+				"enum": [-1, 0, 1, 2]
+			},
+			"DumpItem": {
+				"required": ["path", "state", "createTime", "updateTime"],
+				"type": "object",
+				"description": "Version安装包元数据",
+				"properties": {
+					"path": {
+						"type": "string",
+						"description": "文件路径"
+					},
+					"id": {
+						"type": "string",
+						"description": "打包文件ID"
+					},
+					"url": {
+						"type": "string",
+						"description": "文件路径"
+					},
+					"state": {
+						"$ref": "#/components/schemas/DumpStateEnum"
+					},
+					"createTime": {
+						"type": "string",
+						"description": "创建时间"
+					},
+					"updateTime": {
+						"type": "string",
+						"description": "更新时间"
+					}
+				}
+			},
+			"DumpList": {
+				"type": "object",
+				"properties": {
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/DumpItem"
+						}
+					},
+					"total": {
+						"type": "integer",
+						"description": "列表的内容总数",
+						"format": "int32"
+					},
+					"success": {
+						"type": "boolean"
+					}
+				}
+			},
+			"RoleItem": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "角色Id"
+					},
+					"name": {
+						"type": "string",
+						"description": "角色名称"
+					},
+					"remark": {
+						"type": "string",
+						"description": "角色描述"
+					},
+					"menus": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"RoleList": {
+				"type": "object",
+				"properties": {
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/RoleItem"
+						}
+					},
+					"total": {
+						"type": "number"
+					},
+					"success": {
+						"type": "boolean"
+					}
+				}
+			},
+			"DeleteRoleBody": {
+				"type": "object",
+				"required": ["id"],
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "角色Id"
+					}
+				}
+			},
+			"MenuItem": {
+				"type": "object",
+				"description": "菜单项目model",
+				"properties": {
+					"title": {
+						"type": "string",
+						"description": "名称"
+					},
+					"name": {
+						"type": "string",
+						"description": "组件名称"
+					},
+					"path": {
+						"type": "string",
+						"description": "路由路径"
+					},
+					"status": {
+						"type": "string",
+						"description": "是否启用"
+					},
+					"permission": {
+						"type": "string",
+						"description": "权限code"
+					},
+					"icon": {
+						"type": "string",
+						"description": "图标"
+					},
+					"menuType": {
+						"type": "string",
+						"default": "menu",
+						"description": "菜单类型"
+					},
+					"parentId": {
+						"type": "string",
+						"description": "父菜单ID"
+					},
+					"parentTitle": {
+						"type": "string",
+						"description": "父菜单名称"
+					},
+					"sort": {
+						"type": "number",
+						"description": "排序序号"
+					},
+					"id": {
+						"type": "string",
+						"description": "菜单ID"
+					},
+					"transitionName": {
+						"type": "string",
+						"description": "动画名称"
+					},
+					"redirect": {
+						"type": "string",
+						"description": "重定向地址"
+					},
+					"frameSrc": {
+						"type": "string",
+						"description": "iframe地址"
+					},
+					"component": {
+						"type": "string",
+						"description": "组件地址"
+					},
+					"hideChildrenInMenu": {
+						"type": "boolean",
+						"description": "是否隐藏子菜单"
+					},
+					"hideMenu": {
+						"type": "boolean",
+						"description": "是否隐藏菜单"
+					},
+					"hideTab": {
+						"type": "boolean",
+						"description": "是否隐藏tab"
+					}
+				}
+			},
+			"MenuList": {
+				"type": "array",
+				"items": {
+					"$ref": "#/components/schemas/MenuItem"
+				}
+			},
+			"AccessItem": {
+				"type": "object",
+				"description": "权限tree结构",
+				"required": ["title", "id", "pid"],
+				"properties": {
+					"title": {
+						"type": "string",
+						"description": "权限名称"
+					},
+					"id": {
+						"type": "string",
+						"description": "权限ID"
+					},
+					"pid": {
+						"type": "string",
+						"description": "父权限ID"
+					},
+					"children": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/AccessItem"
+						}
+					}
+				}
+			},
+			"AccessList": {
+				"type": "array",
+				"items": {
+					"$ref": "#/components/schemas/AccessItem"
+				}
+			},
+			"AccessTree": {
+				"type": "object",
+				"description": "权限tree结构",
+				"allOf": [
+					{
+						"$ref": "#/components/schemas/AccessItem"
+					}
+				]
+			},
+			"DeleteAccessBody": {
+				"type": "object",
+				"required": ["id"],
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "Access Id"
+					}
+				}
+			},
+			"simpleRoleList": {
+				"type": "array",
+				"items": {
+					"$ref": "#/components/schemas/RoleItem"
+				}
+			},
+			"ModifyPasswordBody": {
+				"type": "object",
+				"required": ["newPassword", "oldPassword"],
+				"properties": {
+					"newPassword": {
+						"type": "string",
+						"description": "新密码"
+					},
+					"oldPassword": {
+						"type": "string",
+						"description": "旧密码"
+					}
+				}
+			}
+		}
+	}
+}
