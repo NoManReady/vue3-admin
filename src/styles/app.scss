@@ -55,6 +55,7 @@ body,
 		display: flex;
 		flex-direction: column;
 		overflow-x: hidden !important;
+    height: 100%;
 		.el-scrollbar__view {
 			overflow: hidden;
 		}

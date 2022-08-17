@@ -1,6 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
-import request from '@/request';
+import request from '/@/request';
 
 /** 添加角色 POST /api/role/add */
 export async function addRole(body: API.RoleItem, options?: { [key: string]: any }) {

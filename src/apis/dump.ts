@@ -1,6 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
-import request from '@/request';
+import request from '/@/request';
 
 /** 删除文件 POST /api/dump/delete */
 export async function delDump(body: API.DumpDeleteParams, options?: { [key: string]: any }) {

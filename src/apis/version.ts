@@ -1,6 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
-import request from '@/request';
+import request from '/@/request';
 
 /** 上传包 POST /api/version/add */
 export async function addVersion(body: API.VersionItem, options?: { [key: string]: any }) {

@@ -3,6 +3,6 @@ const { resolve } = require('path')
 generateService({
 	schemaPath: resolve(__dirname, './config/openapi.json'),
 	serversPath: './src',
-	requestLibPath: "import request from '@/request'",
+	requestLibPath: "import request from '/@/request'",
     projectName:'apis'
 })

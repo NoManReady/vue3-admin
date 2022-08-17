@@ -4,7 +4,7 @@ export const staticRoutes: RouteRecordRaw[] = [
 	{
 		path: '/login',
 		name: 'login',
-		component: () => import('@/views/login/index.vue'),
+		component: () => import('/@/views/login/index.vue'),
 		meta: {
 			title: '登录',
 		},
@@ -15,7 +15,7 @@ export const dynamicRoutes: RouteRecordRaw[] = [
 	{
 		path: '/',
 		name: '/',
-		component: () => import('@/layout/index.vue'),
+		component: () => import('/@/layout/index.vue'),
 		redirect: '/home',
 		meta: {
 			isKeepAlive: true,
@@ -24,7 +24,7 @@ export const dynamicRoutes: RouteRecordRaw[] = [
 			{
 				path: '/home',
 				name: 'home',
-				component: () => import('@/views/home/index.vue'),
+				component: () => import('/@/views/home/index.vue'),
 				meta: {
 					title: 'message.router.home',
 					isLink: '',
@@ -44,7 +44,7 @@ export const errorRoutes: RouteRecordRaw[] = [
 	{
 		path: '/:path(.*)*',
 		name: 'notFound',
-		component: () => import('@/views/error/404.vue'),
+		component: () => import('/@/views/error/404.vue'),
 		meta: {
 			title: '404找不到',
 			isHide: true,
@@ -53,7 +53,7 @@ export const errorRoutes: RouteRecordRaw[] = [
 	{
 		path: '/401',
 		name: 'noAuth',
-		component: () => import('@/views/error/401.vue'),
+		component: () => import('/@/views/error/401.vue'),
 		meta: {
 			title: '401未认证',
 			isHide: true,

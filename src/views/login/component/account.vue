@@ -37,13 +37,13 @@
 </template>
 
 <script lang="ts">
-import { NextLoading } from '@/utils/loading'
+import { NextLoading } from '/@/utils/loading'
 import { ElMessage } from 'element-plus'
 import { defineComponent, reactive, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-// import { login } from '@/apis/login'
-import api from '@/request/test'
-import { setToken } from '@/utils/cookie'
+// import { login } from '/@/apis/login'
+import loginApis from '/@/apiServer/login'
+import { setToken } from '/@/utils/cookie'
 
 interface ViewState {
 	isShowPassword: boolean
@@ -85,17 +85,17 @@ export default defineComponent({
 		const onSignIn = async () => {
 			state.loading = true
 			try {
-				const result = await api.login({
+				const result = await loginApis.login({
 					...state.baseModel,
 					password: window.btoa(state.baseModel.password),
 				})
-        console.log(result)
+				console.log(result)
 				setToken(result.token as string)
 				onSignSuccess()
 			} catch (error) {
-        console.log(error)
-        ElMessage.error('登陆失败')
-      }
+				console.log(error)
+				ElMessage.error('登陆失败')
+			}
 			state.loading = false
 		}
 		return {

@@ -29,8 +29,8 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import useThemeConfig from '@/stores/useThemeConfig'
-import { Session } from '@/utils/storage'
+import useThemeConfig from '/@/stores/useThemeConfig'
+import { Session } from '/@/utils/storage'
 
 export default defineComponent({
 	name: '401',

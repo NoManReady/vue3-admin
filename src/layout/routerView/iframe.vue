@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import useThemeConfig from '@/store/modules/themeConfig'
+import useThemeConfig from '/@/store/modules/themeConfig'
 import { storeToRefs } from 'pinia'
 import { computed, defineComponent, nextTick, reactive, toRefs, watch } from 'vue'
 import { useRoute } from 'vue-router'

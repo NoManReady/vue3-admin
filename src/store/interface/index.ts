@@ -81,8 +81,13 @@ export interface ThemeConfigStates {
 }
 
 // keepAliveNames
-
 export interface KeepAliveNamesState {
 	keepAliveNames: String[]
 	cachedViews: String[]
+}
+
+// TagsView
+export interface TagsViewRoutesState {
+	tagsViewRoutes: string[]
+	isTagsViewCurrentFull: boolean
 }

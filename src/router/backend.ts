@@ -1,13 +1,13 @@
-import useRoutesList from '@/store/modules/routesList'
-import { getAccesss } from '@/apis/access'
-import useUserInfo from '@/store/modules/user'
-import { toTree } from '@/utils'
-import { NextLoading } from '@/utils/loading'
+import useRoutesList from '/@/store/modules/routesList'
+import accessApis from '/@/apiServer/access'
+import useUserInfo from '/@/store/modules/user'
+import { toTree } from '/@/utils'
+import { NextLoading } from '/@/utils/loading'
 import { storeToRefs } from 'pinia'
 import type { RouteRecordRaw } from 'vue-router'
 import { formatNestedRoutes, formatFlattenRoutes, router } from '.'
 import { dynamicRoutes, errorRoutes } from './routes'
-import pinia from '@/store'
+import pinia from '/@/store'
 
 const layoutModules: Record<string, Function> = import.meta.glob('../layout/routerView/*.{vue,tsx}')
 const viewsModules: Record<string, Function> = import.meta.glob('../views/**/*.{vue,tsx}')
@@ -25,8 +25,8 @@ export async function initBackendRoutes() {
 	// 初始化用户信息
 	await useUserInfo().getUserInfo()
 	// 获取用户权限下的菜单
-	const routes = await getUserAccessMenus()
-	dynamicRoutes[0].children = await resolveComponent(routes)
+	// const routes = await getUserAccessMenus()
+	// dynamicRoutes[0].children = await resolveComponent(routes)
 	setAddRoute()
 	setRoutesToStore()
 }
@@ -81,6 +81,7 @@ export function dynamicImport(dynamicViewsModules: Record<string, Function>, com
 export function getRoutesEnd() {
 	const routesEnd = formatNestedRoutes(formatFlattenRoutes(dynamicRoutes)) || []
 	routesEnd[0].children = [...routesEnd[0].children, ...errorRoutes]
+  console.log(routesEnd)
 	return routesEnd
 }
 
@@ -88,7 +89,7 @@ export function getRoutesEnd() {
  * 动态添加路由
  */
 export function setAddRoute() {
-	const routeMenus=getRoutesEnd()
+	const routeMenus = getRoutesEnd()
 	routeMenus.forEach((route: RouteRecordRaw) => {
 		router.addRoute(route)
 	})
@@ -98,7 +99,7 @@ export async function getUserAccessMenus() {
 	const storesUserInfo = useUserInfo(pinia)
 	const { userInfo } = storeToRefs(storesUserInfo)
 	const access = userInfo.value.menus || {}
-	const result = await getAccesss()
+	const result = await accessApis.getAccess()
 	const routes = result.map((access) => {
 		const { path, name, component, redirect, permission, id, parentId, ...props } = access
 		return { path, name, component, redirect, permission, id, parentId, meta: props }

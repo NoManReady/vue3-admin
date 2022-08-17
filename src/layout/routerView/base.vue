@@ -11,9 +11,9 @@
 </template>
 
 <script lang="ts">
-import useKeepALiveNames from '@/store/modules/keepALiveNames'
-import useThemeConfig from '@/store/modules/themeConfig.js'
-import { Session } from '@/utils/storage'
+import useKeepALiveNames from '/@/store/modules/keepALiveNames'
+import useThemeConfig from '/@/store/modules/themeConfig.js'
+import { Session } from '/@/utils/storage'
 import { storeToRefs } from 'pinia'
 import {
 	computed,

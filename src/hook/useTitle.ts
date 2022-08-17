@@ -1,5 +1,5 @@
-import { router } from '@/router'
-import useThemeConfig from '@/store/modules/themeConfig'
+import { router } from '/@/router'
+import useThemeConfig from '/@/store/modules/themeConfig'
 import { storeToRefs } from 'pinia'
 import { nextTick } from 'vue'
 

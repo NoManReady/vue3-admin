@@ -78,3 +78,7 @@ export const toTree = <T = any>(
 	})
 	return result
 }
+
+let a: unknown
+a = []
+console.log(a.length)

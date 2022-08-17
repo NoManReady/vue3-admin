@@ -1,22 +1,26 @@
 <template>
-	<component :is="themeConfig.layout" />
+	<div class="layout-navbars-container">
+		<TagsView v-if="themeConfig.isTagsview" />
+	</div>
 </template>
 
 <script lang="ts">
 import useThemeConfig from '/@/store/modules/themeConfig'
 import { storeToRefs } from 'pinia'
-import { defineAsyncComponent, defineComponent } from 'vue'
-
+import { defineComponent } from 'vue'
+import TagsView from './tagsView/index.vue'
 export default defineComponent({
-	name: 'layout',
+	name: 'layoutNavBars',
 	components: {
-		defaults: defineAsyncComponent(() => import('/@/layout/main/defaults.vue')),
+		TagsView,
 	},
 	setup() {
 		const storesThemeConfig = useThemeConfig()
 		const { themeConfig } = storeToRefs(storesThemeConfig)
 
-		return { themeConfig }
+		return {
+			themeConfig,
+		}
 	},
 })
 </script>

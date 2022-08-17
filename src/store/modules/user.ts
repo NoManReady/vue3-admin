@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 import { UserStates } from '../interface'
 
-import { getUserInfo as getUserInfoApi } from '@/apis/user'
+import userApis from '/@/apiServer/user'
 
 const useUserInfo = defineStore('user', () => {
 	const state: UserStates = reactive({
@@ -25,7 +25,7 @@ const useUserInfo = defineStore('user', () => {
 	}
 
 	const getUserInfo = async () => {
-		const userInfo = await getUserInfoApi()
+		const userInfo = await userApis.getUserInfo()
 		setUserInfo(userInfo)
 	}
 

@@ -2,13 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-import useThemeConfig from '@/store/modules/themeConfig'
+import useThemeConfig from '/@/store/modules/themeConfig'
 import { storeToRefs } from 'pinia'
 import { staticRoutes } from './routes'
-import { getToken } from '@/utils/cookie'
-import useRoutesList from '@/store/modules/routesList'
+import { getToken } from '/@/utils/cookie'
+import useRoutesList from '/@/store/modules/routesList'
 import { initBackendRoutes } from './backend'
-import pinia from '@/store'
+import pinia from '/@/store'
 
 const storesThemeConfig = useThemeConfig(pinia)
 

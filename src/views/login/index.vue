@@ -17,12 +17,12 @@
 </template>
 
 <script lang="ts">
-import useThemeConfig from '@/store/modules/themeConfig'
+import useThemeConfig from '/@/store/modules/themeConfig'
 import { storeToRefs } from 'pinia'
 import { computed, defineComponent, onMounted } from 'vue'
-import logoMini from '@/assets/logo-mini.svg'
-import loginIconTwo from '@/assets/login-icon-two.svg'
-import { NextLoading } from '@/utils/loading'
+import logoMini from '/@/assets/logo-mini.svg'
+import loginIconTwo from '/@/assets/login-icon-two.svg'
+import { NextLoading } from '/@/utils/loading'
 import Account from './component/account.vue'
 export default defineComponent({
 	name: 'loginIndex',

@@ -1,4 +1,4 @@
-import useThemeConfig from '@/store/modules/themeConfig'
+import useThemeConfig from '/@/store/modules/themeConfig'
 import { createI18n } from 'vue-i18n'
 
 import zhcnLocale from 'element-plus/lib/locale/lang/zh-cn'

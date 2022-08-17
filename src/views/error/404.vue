@@ -28,7 +28,7 @@
 import { defineComponent, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import useThemeConfig from '@/stores/useThemeConfig'
+import useThemeConfig from '/@/stores/useThemeConfig'
 
 export default defineComponent({
 	name: '404',

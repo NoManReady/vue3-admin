@@ -2,6 +2,7 @@
 /* eslint-disable */
 interface ImportMetaEnv {
 	readonly VITE_API_HOST: string
+	readonly VITE_PUBLIC_PATH: string
 }
 
 interface ImportMeta {

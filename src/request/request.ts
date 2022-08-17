@@ -7,6 +7,7 @@ import type {
 	RequestOptions,
 	CreateRequestConfig,
 	CreateRequestClient,
+	HeaderHandler,
 } from './types'
 
 const MATCH_METHOD = /^(GET|POST|PUT|DELETE|HEAD|OPTIONS|CONNECT|TRACE|PATCH)\s+/
@@ -94,4 +95,14 @@ export function createRequestClient<T extends APISchema>(
 		}
 	)
 	return attachAPI<T>(client, requestConfig.apis)
+}
+
+export function createRequestClientFn(config?: AxiosRequestConfig, headerHandler?: HeaderHandler) {
+	return <T extends APISchema>(requestConfig: CreateRequestConfig<T>) => {
+		return createRequestClient<T>({
+			baseConfig: config,
+			headerHandlers: headerHandler ? [headerHandler] : [],
+			...requestConfig,
+		})
+	}
 }

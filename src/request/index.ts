@@ -1,7 +1,7 @@
-import request from '@/server'
-import type { RequestConfig } from '@/server/interface'
+import request from '/@/server'
+import type { RequestConfig } from '/@/server/interface'
 
-import { getToken } from '@/utils/cookie'
+import { getToken } from '/@/utils/cookie'
 
 interface DMSResponse<T = any> {
 	success: boolean

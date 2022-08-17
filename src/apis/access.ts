@@ -1,6 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
-import request from '@/request';
+import request from '/@/request';
 
 /** 根据roleId获取权限列表 GET /api/access/byRole */
 export async function getAccessByRole(
